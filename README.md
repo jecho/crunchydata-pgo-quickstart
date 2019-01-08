@@ -46,5 +46,6 @@ export CO_APISERVER_URL=${HTTPS}${CO_APISERVER_URL}:${CO_APISERVER_PORT}
 ```
 
 # Verify
+```
 pgo version
-
+```
