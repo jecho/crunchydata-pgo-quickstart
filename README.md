@@ -50,6 +50,9 @@ export PGO_CLIENT_KEY=$COROOT/conf/postgres-operator/server.key
 echo "username:password" > $HOME/.pgouser
 ```
 
+## Setup PGO Client
+we have to wait until the provider declares an external ip to map
+
 extracts external ip and sets our pgo client
 ```
 export CO_APISERVER_NAME=$(kubectl get svc --selector=app=pgo -o=jsonpath="{.items[0].metadata.name}")
