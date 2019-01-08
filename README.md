@@ -1,5 +1,4 @@
-# postgres-operator-notes
-# postgres-operator-notes
+# postgres-operator-notes, for github.com/CrunchyData/postgres-operator
 
 ## Quickstart (quick n dirty)
 sets up the helm cluster and all the variables we didn't really want to read about
