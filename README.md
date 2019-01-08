@@ -1,4 +1,4 @@
-# postgres-operator-notes, for github.com/CrunchyData/postgres-operator
+# notes for github.com/CrunchyData/postgres-operator
 
 ## Quickstart (quick n dirty)
 sets up the helm cluster and all the variables we didn't really want to read about
@@ -19,11 +19,14 @@ export CO_IMAGE_PREFIX=crunchydata
 export CO_IMAGE_TAG=centos7-3.4.0
 ```
 
-Install the PGO client
+Install the pgo client
 ```
+wget https://github.com/CrunchyData/postgres-operator/releases/download/3.4.0/pgo-mac
+chmod +x pgo
+mv pgo-mac /usr/local/bin/pgo
 ```
 
-Install the PGO client
+Stand up variables for our pgo client
 ```
 export PGO_CA_CERT=$COROOT/conf/postgres-operator/server.crt
 export PGO_CLIENT_CERT=$COROOT/conf/postgres-operator/server.crt
@@ -31,7 +34,7 @@ export PGO_CLIENT_KEY=$COROOT/conf/postgres-operator/server.key
 echo "username:password" > $HOME/.pgouser
 ```
 
-installs the operator thru helm
+Installs the Operator thru Helm
 ```
 cd $COROOT/chart
 helm install ./postgres-operator
@@ -44,8 +47,25 @@ export CO_APISERVER_URL=$(kubectl get svc ${CO_APISERVER_NAME} --output=jsonpath
 export CO_APISERVER_PORT=8443
 export CO_APISERVER_URL=${HTTPS}${CO_APISERVER_URL}:${CO_APISERVER_PORT}
 ```
+## Verify Operator 
+```
+kubectl get deploy --selector=app=pgo
+```
+>
+```
+NAME                                      READY   STATUS    RESTARTS   AGE
+invisible-elephant-pgo-768789d55c-b8f68   2/2     Running   0          38m
+```
 
-# Verify
+## Verify client
 ```
 pgo version
 ```
+>
+```
+pgo client version 3.4.0
+apiserver version 3.4.0
+```
+
+## Deploy some things
+that stuff will go here
