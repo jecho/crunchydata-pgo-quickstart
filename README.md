@@ -15,7 +15,7 @@ Source the project
 cd ~
 mkdir -p staging
 cd staging
-git clone https://github.com/jecho/postgres-operator-notes
+git clone https://github.com/CrunchyData/postgres-operator/
 export COROOT=$HOME/staging/postgres-operator
 ```
 
