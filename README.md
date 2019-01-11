@@ -81,5 +81,45 @@ pgo client version 3.4.0
 apiserver version 3.4.0
 ```
 
-## Deploy some things
-that stuff will go here
+## basic commands 
+```
+pgo create cluster m  # crates primary db instance
+pgo create cluster m --pgpool # creates traditinal postgres loadbalancer
+pgo create cluster m --replica-count=2 # creates replica
+pgo create cluster m --metrics # enables sidecar
+pgo create cluster m --replica-count=2 --pgpool --replica-count=2 # aggregated args
+pgp delete cluster m
+pgo status m
+pgp show user m   # shows username and passwords for databases
+```
+
+## Integrating into Prometheus 
+deploy Prometheus-operator chart and substitute values.yaml at section _additionalScrapeConfigs_
+```
+additionalScrapeConfigs: 
+- job_name: 'default-auto-discovery-postgres'
+  scrape_interval: 30s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  kubernetes_sd_configs:
+  - role: endpoints
+    namespaces:
+      names:
+      - default
+  relabel_configs:
+  - source_labels: [__meta_kubernetes_pod_container_port_number]
+    action: keep
+    regex: 9\d{3}
+  metric_relabel_configs:
+  - source_labels: [ __name__ ]
+    regex: '(pg_locks_count.*|pg_settings.*|pg_stat_activity.*|pg_stat_bgwriter.*|pg_stat_database.*)'
+    action: drop
+```
+It is purposefully scanning port rage 9000-9999 in default namespace. Still needs to be cleaned up.
+
+## Integrating into Grapha
+Manual for now. Using pgmonitors dashboards, but should be integrated into Prometheus operator
+
+https://github.com/CrunchyData/pgmonitor/tree/master/grafana
+Pick and choose
