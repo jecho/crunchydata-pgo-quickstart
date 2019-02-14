@@ -38,7 +38,7 @@ helm install ./postgres-operator
 Install the pgo client
 ```
 wget https://github.com/CrunchyData/postgres-operator/releases/download/3.4.0/pgo-mac
-chmod +x pgo
+chmod +x pgo-mac
 mv pgo-mac /usr/local/bin/pgo
 ```
 
