@@ -16,6 +16,7 @@ cd ~
 mkdir -p staging
 cd staging
 git clone https://github.com/CrunchyData/postgres-operator/
+git checkout 3.4.0
 export COROOT=$HOME/staging/postgres-operator
 ```
 
