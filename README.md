@@ -53,6 +53,9 @@ echo "username:password" > $HOME/.pgouser
 
 ## Setup PGO Client
 we have to wait until the provider declares an external ip to map
+```
+kubectl patch svc postgres-operator-pgo -p '{"spec": {"type": "LoadBalancer"}}'
+```
 
 extracts external ip and sets our pgo client
 ```
@@ -90,7 +93,7 @@ pgo create cluster m --replica-count=2 # creates replica
 pgo create cluster m --metrics # enables sidecar
 pgo create cluster m --replica-count=2 --pgpool --replica-count=2 # aggregated args
 pgp delete cluster m
-pgo delete cluster mycluster --delete-data --delete-backups
+pgo delete cluster m --delete-data --delete-backups
 pgo status m
 pgp show user m   # shows username and passwords for databases
 ```
