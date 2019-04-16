@@ -90,6 +90,7 @@ pgo create cluster m --replica-count=2 # creates replica
 pgo create cluster m --metrics # enables sidecar
 pgo create cluster m --replica-count=2 --pgpool --replica-count=2 # aggregated args
 pgp delete cluster m
+pgo delete cluster mycluster --delete-data --delete-backups
 pgo status m
 pgp show user m   # shows username and passwords for databases
 ```
